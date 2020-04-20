@@ -1,7 +1,11 @@
+let time = null
+
 function handleKeyUp(event) {
-  setTimeout(() => {
+  clearTimeout(time)
+
+  time = setTimeout(() => {
     console.log(event.target.value)
-  }, 1000); //still run all the time
+  }, 1000);
 }
 
 document.querySelector('input').addEventListener('keyup', handleKeyUp)
