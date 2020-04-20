@@ -4,13 +4,17 @@ const filter = async(value) =>
    fetch(`https://jsonplaceholder.typicode.com/users?name_like=${value}`)
     .then(res => res.json())
 
-function handleKeyUp(event) {
+function debounceEvent(value){
   clearTimeout(time)
 
   time = setTimeout(() => {
-    filter(event.target.value)
-      .then(data => console.log(data))
+    filter(value)
+      .then(data => console.log(data.map(user => user.name)))
   }, 1000);
+}
+
+function handleKeyUp(event) {
+  debounceEvent(event.target.value)
 }
 
 document.querySelector('input').addEventListener('keyup', handleKeyUp)
