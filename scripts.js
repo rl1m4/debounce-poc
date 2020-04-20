@@ -1,15 +1,11 @@
 let time = null
 
-filter('Leanne')
-
-async function filter(value) {
-  return fetch(`https://jsonplaceholder.typicode.com/users?name_like=${value}`)
+const filter = async(value) =>
+   fetch(`https://jsonplaceholder.typicode.com/users?name_like=${value}`)
     .then(res => res.json())
     .then(data => console.log(data))
-}
 
-
-
+filter('in')
 
 function handleKeyUp(event) {
   clearTimeout(time)
