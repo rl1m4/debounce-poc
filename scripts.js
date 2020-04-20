@@ -5,12 +5,11 @@ const filter = async(value) =>
 const debounceEvent = () => {
   let time = null
 
-  return function(value) {
+  return function(fn) {
     clearTimeout(time)
 
     time = setTimeout(() => {
-      filter(value)
-        .then(data => console.log(data.map(user => user.name)))
+      fn()
     }, 500)
   }
 }
@@ -18,7 +17,10 @@ const debounceEvent = () => {
 const debounce = debounceEvent()
 
 function handleKeyUp(event) {
-  debounce(event.target.value)
+  debounce(() => {
+    filter(event.target.value)
+      .then(data => console.log(data.map(user => user.name)))
+  })
 }
 
 document.querySelector('input').addEventListener('keyup', handleKeyUp)
