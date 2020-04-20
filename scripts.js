@@ -1,11 +1,13 @@
 let time = null
 
-filter()
+let data = []
 
-function filter() {
-  fetch('https://jsonplaceholder.typicode.com/users')
+filter('Leanne')
+
+async function filter(value) {
+  data = await fetch(`https://jsonplaceholder.typicode.com/users?name_like=${value}`)
     .then(res => res.json())
-    .then(data => console.log(data))
+  console.log(data)
 }
 
 function handleKeyUp(event) {
