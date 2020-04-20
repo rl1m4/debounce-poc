@@ -1,20 +1,24 @@
-let time = null
-
 const filter = async(value) =>
    fetch(`https://jsonplaceholder.typicode.com/users?name_like=${value}`)
     .then(res => res.json())
 
-function debounceEvent(value){
-  clearTimeout(time)
+const debounceEvent = () => {
+  let time = null
 
-  time = setTimeout(() => {
-    filter(value)
-      .then(data => console.log(data.map(user => user.name)))
-  }, 1000);
+  return function(value) {
+    clearTimeout(time)
+
+    time = setTimeout(() => {
+      filter(value)
+        .then(data => console.log(data.map(user => user.name)))
+    }, 500)
+  }
 }
 
+const debounce = debounceEvent()
+
 function handleKeyUp(event) {
-  debounceEvent(event.target.value)
+  debounce(event.target.value)
 }
 
 document.querySelector('input').addEventListener('keyup', handleKeyUp)
