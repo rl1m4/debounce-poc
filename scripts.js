@@ -1,5 +1,13 @@
 let time = null
 
+filter()
+
+function filter() {
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => console.log(data))
+}
+
 function handleKeyUp(event) {
   clearTimeout(time)
 
